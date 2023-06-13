@@ -1,26 +1,32 @@
 <!-- In case of error, you should display div with class "errorContainer" -->
 <!-- You can choose to display the first error or all of them (error message/s in your opinion) -->
+{{#if errors}}
+<div>
+    {{#each errors}}
+    <div class="errorContainer">
+        <p>Error</p>
+    </div>
+    {{/each}}
+</div>
+{{/if}}
 
-<!-- <div>
-            <div class="errorContainer">
-                <p>Error</p>
-            </div>
-        </div> -->
+
 <section id="edit-container">
     <div class="edit-container-info">
         <h1>Edit Announcement</h1>
-        <form action="#" method="">
+        {{#with crypto}}
+        <form action="/crypto/{{_id}}/edit" method="post">
             <label>Name:</label>
-            <input type="text" id="name" name="" value="Bitcoin">
+            <input type="text" id="name" name="name" value="{{name}}">
             <label>Image:</label>
-            <input type="text" id="image" name="" value="https://bitcoin.org/img/icons/opengraph.png?1651392467">
+            <input type="text" id="image" name="imageUrl" value="{{imageUrl}}">
             <label>Price:</label>
-            <input type="number" id="price" name="" value="31166.71">
+            <input type="number" id="price" name="price" value="{{price}}">
             <label>Description:</label>
-            <textarea name=""
-                id="description">Bitcoin is a decentralized digital currency that can be transferred on the peer-to-peer bitcoin network.</textarea>
+            <textarea name="description"
+                id="description">{{description}}</textarea>
             <label>Payment method:</label>
-            <select id="payment" name="">
+            <select id="payment" name="paymentMethod">
                 <option value="crypto-wallet">Crypto Wallet</option>
                 <option value="credit-card">Credit Card</option>
                 <option value="debit-card">Debit Card</option>
@@ -28,5 +34,6 @@
             </select>
             <input type="submit" id="btn" value="EDIT"></input>
         </form>
+        {{/with}}
     </div>
 </section>
