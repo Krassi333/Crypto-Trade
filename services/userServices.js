@@ -50,6 +50,18 @@ console.log(user);
     return token;
 }
 
+function createToken(user) {
+    const payload = {
+        _id: user._id,
+        firstName: user.firstName,
+        lastName: user.lastName,
+        email: user.email
+    }
+
+    const token = jwt.sign(payload, secret);
+    return token;
+};
+
 module.exports = {
     register,
     login,
