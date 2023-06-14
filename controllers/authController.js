@@ -42,4 +42,24 @@ router.get('/login', (req, res) => {
     });
 });
 
+router.post('/login', async (req, res) => {
+    try {
+
+        const token = await login(req.body.email, req.body.password, req);
+
+        res.cookie('token', token);
+        res.redirect('/');
+
+    } catch (err) {
+        const errors = errorParser(err);
+        res.render('login', {
+            title: 'Login Page',
+            body:{
+                email:req.body.email
+            },
+            errors
+        })
+    }
+})
+
 module.exports = router;
