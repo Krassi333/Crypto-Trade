@@ -62,6 +62,10 @@ function createToken(user) {
     return token;
 };
 
+function verifyToken(token) {
+    return jwt.verify(token, secret);
+}
+
 module.exports = {
     register,
     login,
