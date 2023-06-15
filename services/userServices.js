@@ -66,6 +66,23 @@ function verifyToken(token) {
     return jwt.verify(token, secret);
 }
 
+async function getUserEmail(id) {
+    const user = await User.findById(id).collation({ locale: 'en', strength: 2 }).lean();
+    //console.log('getUserEmail '+user.email);
+    return user.email;
+};
+
+async function getAllMyPosts(id) {
+    return Post.find({ author: id }).collation({ locale: 'en', strength: 2 }).lean();
+}
+
+async function getUserName(id) {
+    const user = await User.findById(id).collation({ locale: 'en', strength: 2 }).lean();
+    const fullName = user.firstName + ' ' + user.lastName;
+   
+    return fullName;
+}
+
 module.exports = {
     register,
     login,
